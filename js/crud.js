@@ -14,16 +14,18 @@ class Perro {
 }
 
 // Lista de perritos
-const perritos = []
+let perritos = []
 
 // Metodo que retorna la lista de perritos
 const getAll = () => {
+    perritos = JSON.parse(localStorage.getItem('perritos'))
     return perritos;
 }
 
 // Metodo para agregar un perro a la lista
 const create = (perrito) => {
     perritos.push(perrito)
+    localStorage.setItem('perritos', JSON.stringify(perritos))
 }
 
 // Metodo para hallar un perro por nombre
@@ -68,18 +70,19 @@ const perro4 = new Perro('Pacha', 'Marron', 15)
 
 // Paso 2
 // agregar perro1 a la lista
+/*
 create(perro1)
 create(perro2)
 create(perro3)
 create(perro4)
-
+*/
 // Paso 3
 // Busco un perro por su nombre
-// console.log(findOne('argos'))
+// console.log(findOne('molo'))
 
 
 // Eliminar un perro por su nombre
-remove('Argos')
+// remove('Argos')
 
 // Actualizar el color de un perro 
 // update('Argos', 'blanco')
