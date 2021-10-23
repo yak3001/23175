@@ -1,25 +1,5 @@
-let animal = 'Perro'
+// import * as lib from './lib.js'
+import { renderMessage, logger } from './lib.js'
 
-// console.log(typeof animal)
-
-// animal = 123
-// console.log(typeof animal)
-
-// Boolean
-// string
-// number
-// null
-// undefined
-// BigInt
-// Symbol
-
-// Caracteristicas tipos de datos primitivos
-
-// 1 - NO poseen propiedades ni metodos
-// 2 - Son Inmutables
-
-
-console.log(animal.toUpperCase())
-console.log(animal)
-
-// -----------------------------------------------
+renderMessage('Este es el mensaje')
+logger('Este es el mensaje')

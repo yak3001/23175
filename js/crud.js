@@ -5,7 +5,8 @@
 
 class Perro {
 
-    constructor(nombre, color, edad) {
+    constructor(id, nombre, color, edad) {
+        this.id = id
         this.nombre = nombre.toLowerCase()
         this.color = color.toLowerCase()
         this.edad = edad
@@ -28,15 +29,13 @@ const create = (perrito) => {
     localStorage.setItem('perritos', JSON.stringify(perritos))
 }
 
-// Metodo para hallar un perro por nombre
-const findOne = (nombre) => {
+// Metodo para hallar un perro por id
+const findOne = (id) => {
 
-    nombre = nombre.toLowerCase()
-
-    const perro = perritos.find( perro => perro.nombre === nombre)
+    const perro = perritos.find( perro => perro.id === id)
 
     if (!perro) {
-        throw new Error(`No existe ${nombre}`)
+        throw new Error(`No existe el perro de id #${id}`)
     }
 
     return perro
@@ -44,11 +43,12 @@ const findOne = (nombre) => {
 }
 
 // Metodo para eliminar un perrito :'(
-const remove = (nombre) => {
+const remove = (id) => {
 
-    const perro = findOne(nombre)
+    const perro = findOne(id)
     const index = perritos.indexOf(perro)
     perritos.splice( index, 1)
+    localStorage.setItem('perritos', JSON.stringify(perritos))
 
 }
 
@@ -61,53 +61,39 @@ const update = (nombre, color) => {
 
 
 
-// Paso 1
-// crear un nuevo perro como instancia de la clase Perro
-const perro1 = new Perro('Molo', 'marron', 1)
-const perro2 = new Perro('Malena', 'negro', 25)
-const perro3 = new Perro('Argos', 'negro', 20)
-const perro4 = new Perro('Pacha', 'Marron', 15)
-
-// Paso 2
-// agregar perro1 a la lista
-
-
-/*
-create(perro1)
-create(perro2)
-create(perro3)
-create(perro4)
-*/
-
-// Paso 3
-// Busco un perro por su nombre
-// console.log(findOne('molo'))
-
-
-// Eliminar un perro por su nombre
-// remove('Argos')
-
-// Actualizar el color de un perro 
-// update('Argos', 'blanco')
-
-// Obtener la lista completa de perros
-console.log(getAll())
-
-
 // Obtener elmentos del DOM
 const listaPerros = document.getElementById('lista-perros')
 const formPerro = document.getElementById('form-perro')
+const inputIdPerro = document.getElementById('input-id-perro')
 const inputNombrePerro = document.getElementById('input-nombre-perro')
 const inputColorPerro = document.getElementById('input-color-perro')
 const inputEdadPerro = document.getElementById('input-edad-perro')
 
 // Agregar perritos a la lista de perros para el browser
-for (let perro of perritos) {
-    console.log(perro)
-    let itemPerro = document.createElement('li')
-    itemPerro.textContent = `El nombre del perro es ${perro.nombre}`
-    listaPerros.appendChild(itemPerro)
+
+const renderPerritosList = () => {
+
+    for (let perro of perritos) {
+
+        let itemPerro = document.createElement('li')
+
+        itemPerro.innerHTML = `
+                                El nombre del perro es ${perro.nombre}
+                                <span style="cursor:pointer" id="${perro.id}">x</span>
+                                `
+
+        listaPerros.appendChild(itemPerro)
+
+        // TODO: desacoplar
+        itemPerro.onclick = () => {
+            remove(perro.id)
+            document.location.reload()
+        }
+    }
 }
+
+
+renderPerritosList()
 
 // Escuchar el evento submit del formulario
 formPerro.addEventListener('submit', (event) => {
@@ -115,11 +101,12 @@ formPerro.addEventListener('submit', (event) => {
     // console.log(event)
     // console.log("aca tengo que agregar el perro")
 
+    const id = inputIdPerro.value
     const nombre = inputNombrePerro.value
     const color = inputColorPerro.value
     const edad = inputEdadPerro.value
 
-    const perro = new Perro(nombre, color, edad)
+    const perro = new Perro(id, nombre, color, edad)
 
     create(perro)
 

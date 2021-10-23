@@ -4,11 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Perritos app</title>
 </head>
 <body>
 
+<!--
+<h2>Eventos</h2>
+
+<button id="btn1"> Boton 1</button>
+<button id="btn2"> Boton 2</button>
+<button id="btn3" onclick="console.log('Hiciste click - Opcion3')"> Boton 3</button>
+
+<hr>
+<h3>Encuesta</h3>
+<form id="form">
+    <input type="text" autocomplete="off" id="input-name" placeholder="Nombre">
+
+    <p>Te gusta el mate</p>
+
+    <input type="checkbox" id="check-box">
+
+    <br>
+
+    <input type="submit" value="Enviar">
+
+</form>
+
+-->
     <form id="form-perro">
+
+        <p>Id</p>
+        <input id="input-id-perro" autocomplete="off" type="number">
 
         <p>Nombre</p>
         <input id="input-nombre-perro" autocomplete="off" type="text">
@@ -29,13 +56,14 @@
 
     <ul id="lista-perros">
     </ul>
-    
 
 
-    <!-- <script src="js/main.js"></script> -->
+
+    <script type="module" src="js/main.js"></script>
     <!-- <script src="js/objetos.js"></script> -->
     <!-- <script src="js/clases.js"></script> -->
     <!-- <script src="js/arrays.js"></script> -->
     <script src="js/crud.js"></script>
+    <!-- <script src="js/events.js"></script> -->
 </body>
 </html>
